@@ -1,6 +1,6 @@
 FROM debian:buster as base
 
-ARG KOPANO_ONE_REPOSITORY_URL="https://repo.kopano.com/kopano/one/"
+ARG KOPANO_ONE_REPOSITORY_URL="https://repo.kopano.com/kopano/one"
 ARG ONE_VERSION=20.09
 
 ENV \
@@ -26,7 +26,7 @@ RUN apt-get update && \
     # TODO setting to hold is only to prove that these packages are installed, altough not needed
     apt-mark hold mariadb-server postfix postfix-ldap && \
     # TODO remove pkgProblemResolver after packages dependencies have been fixed
-    apt-get -o Debug::pkgProblemResolver=true install --no-install-recommends -y kopano-one-20.09-groupware-packages && \
+    apt-get -o Debug::pkgProblemResolver=true install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
     #apt-get install -y kopano-one-any-groupware-system-server && \
     #apt-get install -y kopano-one-any-groupware-packages-server && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*

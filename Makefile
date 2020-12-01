@@ -11,7 +11,7 @@ docker_repo := kopano
 vcs_ref := $(shell git rev-parse --short HEAD)
 date := $(shell date '+%Y%m%d%H%M%S')
 
-KOPANO_ONE_REPOSITORY_URL=https://repo.kopano.com/kopano/one/
+KOPANO_ONE_REPOSITORY_URL=https://repo.kopano.com/kopano/one
 ONE_VERSION=20.09
 
 .PHONY: build
