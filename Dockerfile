@@ -23,13 +23,14 @@ RUN apt-get update && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 RUN apt-get update && \
-    # TODO setting to hold is only to prove that these packages are installed, altough not needed
-    apt-mark hold mariadb-server postfix postfix-ldap && \
-    # TODO remove pkgProblemResolver after packages dependencies have been fixed
-    apt-get -o Debug::pkgProblemResolver=true install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
-    #apt-get install -y kopano-one-any-groupware-system-server && \
-    #apt-get install -y kopano-one-any-groupware-packages-server && \
+    apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF
+
+FROM base as frontend
+
+FROM base as backend
+
+FROM backend as full
