@@ -31,6 +31,12 @@ LABEL org.label-schema.vcs-ref=$VCS_REF
 
 FROM base as frontend
 
+# TODO add parts that would only be required for frontend systems
+
 FROM base as backend
 
+# TODO add parts that would only be required for backend systems
+
 FROM backend as full
+
+# TODO add parts from frontend image
