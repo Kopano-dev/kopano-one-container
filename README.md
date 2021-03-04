@@ -18,3 +18,4 @@ Design goals:
   - haraka instead of postfix?
   - mail container should have fetchmail
 - have deployment examples in subfolders (e.g. Univention, Synology, ...)
+- tooling for automatic building and deployment
