@@ -16,7 +16,7 @@ ONE_VERSION=20.09
 
 .PHONY: build
 build:
-	docker build --rm \
+	docker buildx build --platform linux/amd64 --rm \
 		--build-arg VCS_REF=$(vcs_ref) \
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
 		--build-arg ONE_VERSION=$(ONE_VERSION) \
