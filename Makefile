@@ -20,13 +20,13 @@ build:
 		--build-arg VCS_REF=$(vcs_ref) \
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
 		--build-arg ONE_VERSION=$(ONE_VERSION) \
-		--cache-from $(docker_repo)/kopanoone:latest \
-		-t $(docker_repo)/kopanoone .
+		--cache-from $(docker_repo)/kopano-one:latest \
+		-t $(docker_repo)/kopano-one .
 
 .PHONY: tag
 tag: build
-	docker tag $(docker_repo)/kopanoone $(docker_repo)/kopanoone:$(ONE_VERSION)-$(date)
+	docker tag $(docker_repo)/kopano-one $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
 
 .PHONY: publish
 publish: tag
-	docker push $(docker_repo)/kopanoone:$(ONE_VERSION)-$(date)
+	docker push $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
