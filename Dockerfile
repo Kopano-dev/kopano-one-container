@@ -27,11 +27,14 @@ RUN apt-get update && \
     add-apt-repository "deb $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION $(lsb_release -cs) supported" && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
+#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 CMD ["/usr/bin/supervisord"]
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF
