@@ -10,6 +10,7 @@ services:
       - /etc/machine-id:/var/lib/dbus/machine-id
       - kopanosocket:/run/kopano
     tmpfs:
+      - /run
       - /tmp
 
 volumes:
