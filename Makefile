@@ -21,7 +21,7 @@ build:
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
 		--build-arg ONE_VERSION=$(ONE_VERSION) \
 		--cache-from $(docker_repo)/kopano-one:latest \
-		-t $(docker_repo)/kopano-one .
+		-t $(docker_repo)/kopano-one:latest .
 
 .PHONY: build-base
 build-base:
@@ -45,8 +45,10 @@ build-frontend:
 
 .PHONY: tag
 tag: build
-	docker tag $(docker_repo)/kopano-one $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
+	docker tag $(docker_repo)/kopano-one:latest $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
 
 .PHONY: publish
 publish: tag
+	docker push $(docker_repo)/kopano-one:latest
 	docker push $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
+
