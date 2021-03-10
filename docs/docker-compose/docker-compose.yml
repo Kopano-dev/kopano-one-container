@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  kopano-one:
+    image: ${docker_repo:-kopano}/kopano-one:${ONE_VERSION:-latest}
+    read_only: true
+    restart: unless-stopped
+    volumes:
+      - /etc/machine-id:/etc/machine-id
+      - /etc/machine-id:/var/lib/dbus/machine-id
+      - kopanosocket:/run/kopano
+    tmpfs:
+      - /tmp
+
+volumes:
+  kopanodata:
+  kopanolicenses:
+  kopanosocket:
+
+networks:
+  kopano-net:
+    driver: bridge
+  web-net:
