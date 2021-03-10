@@ -52,3 +52,5 @@ publish: tag
 	docker push $(docker_repo)/kopano-one:latest
 	docker push $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
 
+run:
+	docker-compose -f docs/docker-compose/docker-compose.yml up
