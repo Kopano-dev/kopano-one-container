@@ -17,7 +17,12 @@ LABEL maintainer=development@kopano.io \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y curl gnupg2 software-properties-common && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        gnupg2 \
+        software-properties-common \
+        supervisor \
+        && \
     curl -fsSL $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION/gpg | apt-key add - && \
     add-apt-repository "deb $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION $(lsb_release -cs) supported" && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
@@ -25,6 +30,8 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
+
+CMD ["/usr/bin/supervisord"]
 
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF
