@@ -25,7 +25,7 @@ build:
 
 .PHONY: build-base
 build-base:
-	docker build --rm \
+	docker buildx build --platform linux/amd64 --rm \
 		--target base \
 		--build-arg VCS_REF=$(vcs_ref) \
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
@@ -35,7 +35,7 @@ build-base:
 
 .PHONY: build-frontend
 build-frontend:
-	docker build --rm \
+	docker buildx build --platform linux/amd64 --rm \
 		--target frontend \
 		--build-arg VCS_REF=$(vcs_ref) \
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
