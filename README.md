@@ -18,4 +18,5 @@ Design goals:
   - haraka instead of postfix?
   - mail container should have fetchmail
 - have deployment examples in subfolders (e.g. Univention, Synology, ...)
+  - Kubernetes Operator
 - tooling for automatic building and deployment
