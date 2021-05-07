@@ -1,4 +1,4 @@
-FROM debian:buster as base
+FROM phusion/baseimage:focal-1.0.0
 
 ARG KOPANO_ONE_REPOSITORY_URL="https://repo.kopano.com/kopano/one"
 ARG ONE_VERSION=20.09
