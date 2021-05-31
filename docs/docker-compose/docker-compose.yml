@@ -6,6 +6,7 @@ services:
     #read_only: true
     restart: unless-stopped
     volumes:
+      - ./config:/etc/kopano/
       - /etc/machine-id:/etc/machine-id
       - /etc/machine-id:/var/lib/dbus/machine-id
       - kopanosocket:/run/kopano

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# read settings from kwebd.cfg into env (emulates systemds EnvironmentFile)
+sed s/\ *=\ */=/g "/etc/kopano/kwebd.cfg" > /tmp/kweb-env
+# shellcheck disable=SC2046
+export $(grep -v '^#' /tmp/kweb-env | xargs -d '\n')
+
+exec bash -x /usr/sbin/kopano-kwebd serve

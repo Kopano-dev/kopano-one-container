@@ -14,6 +14,10 @@ LABEL maintainer=development@kopano.io \
     org.label-schema.version=$ONE_VERSION \
     org.label-schema.schema-version="1.0"
 
+EXPOSE 80 443
+
+VOLUME ["/etc/kopano/", "/var/lib/mysql/", "/var/lib/kopano/"]
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update && \
