@@ -5,4 +5,6 @@ sed s/\ *=\ */=/g "/etc/kopano/kwebd.cfg" > /tmp/kweb-env
 # shellcheck disable=SC2046
 export $(grep -v '^#' /tmp/kweb-env | xargs -d '\n')
 
-exec bash -x /usr/sbin/kopano-kwebd serve
+/usr/sbin/kopano-kwebd setup
+
+exec /usr/sbin/kopano-kwebd serve
