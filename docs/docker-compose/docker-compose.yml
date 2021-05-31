@@ -3,13 +3,14 @@ version: "3.5"
 services:
   kopano-one:
     image: ${docker_repo:-kopano}/kopano-one:${ONE_VERSION:-latest}
-    read_only: true
+    #read_only: true
     restart: unless-stopped
     volumes:
       - /etc/machine-id:/etc/machine-id
       - /etc/machine-id:/var/lib/dbus/machine-id
       - kopanosocket:/run/kopano
     tmpfs:
+      - /run
       - /tmp
 
 volumes:
