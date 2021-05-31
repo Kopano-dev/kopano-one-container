@@ -23,20 +23,8 @@ RUN apt-get update && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION-groupware-packages && \
+    apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF
-
-FROM base as frontend
-
-# TODO add parts that would only be required for frontend systems
-
-FROM base as backend
-
-# TODO add parts that would only be required for backend systems
-
-FROM backend as full
-
-# TODO add parts from frontend image
