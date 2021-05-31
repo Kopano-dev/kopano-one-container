@@ -26,5 +26,10 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
+ADD runit /etc/service
+
+# explicitly set init script of base image
+CMD ["/sbin/my_init"]
+
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF

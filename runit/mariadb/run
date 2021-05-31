@@ -1,0 +1,6 @@
+#!/bin/sh
+
+chown -R mysql:mysql /var/lib/mysql
+
+exec 2>&1
+exec /usr/bin/mysqld_safe

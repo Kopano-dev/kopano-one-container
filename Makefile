@@ -22,6 +22,10 @@ build:
 		--build-arg ONE_VERSION=$(ONE_VERSION) \
 		-t $(DOCKER_REPO)/kopano-one .
 
+.PHONY: test
+test:
+	docker-compose -f docs/docker-compose/docker-compose.yml up
+
 .PHONY: tag
 tag: build
 	docker tag $(DOCKER_REPO)/kopano-one $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(DATE)
