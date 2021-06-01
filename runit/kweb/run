@@ -7,4 +7,4 @@ export $(grep -v '^#' /tmp/kweb-env | xargs -d '\n')
 
 /usr/sbin/kopano-kwebd setup
 
-exec /usr/sbin/kopano-kwebd serve
+exec /sbin/setuser www-data /usr/sbin/kopano-kwebd serve

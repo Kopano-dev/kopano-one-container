@@ -26,6 +26,14 @@ build:
 test:
 	docker-compose -f docs/docker-compose/docker-compose.yml up
 
+.PHONY: test-clean
+test-clean:
+	docker-compose -f docs/docker-compose/docker-compose.yml down -v
+
+.PHONY: test-enter
+test-enter:
+	docker-compose -f docs/docker-compose/docker-compose.yml exec kopano-one bash
+
 .PHONY: tag
 tag: build
 	docker tag $(DOCKER_REPO)/kopano-one $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(DATE)

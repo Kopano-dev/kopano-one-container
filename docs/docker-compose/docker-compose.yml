@@ -18,8 +18,3 @@ volumes:
   kopanodata:
   kopanolicenses:
   kopanosocket:
-
-networks:
-  kopano-net:
-    driver: bridge
-  web-net:
