@@ -14,7 +14,7 @@ LABEL maintainer=development@kopano.io \
     org.label-schema.version=$ONE_VERSION \
     org.label-schema.schema-version="1.0"
 
-EXPOSE 80 443
+EXPOSE 9080 9443
 
 VOLUME ["/etc/kopano/", "/var/lib/mysql/", "/var/lib/kopano/"]
 
@@ -28,6 +28,7 @@ RUN apt-get update && \
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
+    # TODO add kopano-smtpstd and kopano-kidmd once available
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 ADD runit /etc/service
