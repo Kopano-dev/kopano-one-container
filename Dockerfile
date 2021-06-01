@@ -31,6 +31,9 @@ RUN apt-get update && \
     # TODO add kopano-smtpstd and kopano-kidmd once available
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
+# move original config files to a backup location so they are still accessible when mounting /etc/kopano from the host
+RUN mv /etc/kopano /etc/kopano.in && ln -sf /etc/kopano.in /etc/kopano
+
 ADD runit /etc/service
 
 # explicitly set init script of base image

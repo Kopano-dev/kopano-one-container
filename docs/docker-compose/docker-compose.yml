@@ -16,5 +16,4 @@ services:
 
 volumes:
   kopanodata:
-  kopanolicenses:
   kopanosocket:
