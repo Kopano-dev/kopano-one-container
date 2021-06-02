@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euxo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config konnectd.cfg
+
+# read settings from konnectd.cfg into env (emulates systemds EnvironmentFile)
+sed s/\ *=\ */=/g "/etc/kopano/konnectd.cfg" > /tmp/konnectd-env
+# shellcheck disable=SC2046
+export $(grep -v '^#' /tmp/konnectd-env | xargs -d '\n')
+
+/usr/sbin/kopano-konnectd setup
+
+exec /sbin/setuser konnect /usr/sbin/kopano-konnectd serve

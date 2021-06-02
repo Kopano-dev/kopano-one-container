@@ -16,7 +16,14 @@ services:
     tmpfs:
       - /run
       - /tmp
+    networks:
+      kopano:
+        aliases:
+          - kopano.demo
 
 volumes:
   kopanodata:
   kopanosocket:
+
+networks:
+  kopano:
