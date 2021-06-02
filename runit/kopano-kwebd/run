@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+set -euxo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config kwebd.cfg
+ensure_dir /etc/kopano/extra.d
 
 # read settings from kwebd.cfg into env (emulates systemds EnvironmentFile)
 sed s/\ *=\ */=/g "/etc/kopano/kwebd.cfg" > /tmp/kweb-env

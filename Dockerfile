@@ -28,13 +28,16 @@ RUN apt-get update && \
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
-    # TODO add kopano-smtpstd and kopano-kidmd once available
+    # TODO add kopano-smtpstd kopano-kidmd once available
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
-# move original config files to a backup location so they are still accessible when mounting /etc/kopano from the host
-RUN mv /etc/kopano /etc/kopano.in && ln -sf /etc/kopano.in /etc/kopano
+# copy original config files to a backup location
+# so they are still available when /etc/kopano/ gets mounted from the host
+RUN cp -r /etc/kopano /etc/kopano.in
 
 ADD runit /etc/service
+
+WORKDIR /etc/kopano
 
 # explicitly set init script of base image
 CMD ["/sbin/my_init"]
