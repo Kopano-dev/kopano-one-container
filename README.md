@@ -12,6 +12,8 @@ docker run -it -v /tmp/kopano-config:/etc/kopano -v /tmp/kopano-data:/var/lib/ko
 
 With the above command the container will at startup copy example configuration to `/tmp/kopano-config` which can then be adapted for the local environment.
 
+For more usage example check the [docs](docs/) folder.
+
 ## Using an external database
 
 To disable the built-in database simply create the following file in the container `/etc/service/mariadb/down`. This will prevent the automatic start of the database.
