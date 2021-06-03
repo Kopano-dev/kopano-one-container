@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES on kopano.* to 'kopano'@'localhost' IDENTIFIED via unix_socket;

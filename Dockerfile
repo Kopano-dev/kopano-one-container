@@ -21,7 +21,7 @@ VOLUME ["/etc/kopano/", "/var/lib/mysql/", "/var/lib/kopano/"]
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y curl gnupg2 software-properties-common && \
+    apt-get install --no-install-recommends -y curl gnupg2 pwgen software-properties-common && \
     curl -fsSL $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION/gpg | apt-key add - && \
     add-apt-repository "deb $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION $(lsb_release -cs) supported" && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
@@ -29,7 +29,24 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
     # TODO add kopano-smtpstd kopano-kidmd once available
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
+    rm -rf /var/cache/apt /var/lib/apt/lists/* && \
+# purge and re-create /var/lib/mysql with appropriate ownership
+	rm -rf /var/lib/mysql; \
+	mkdir -p /var/lib/mysql; \
+	chown -R mysql:mysql /var/lib/mysql; \
+# comment out a few problematic configuration values
+	find /etc/mysql/ -name '*.cnf' -print0 \
+		| xargs -0 grep -lZE '^(bind-address|log|user\s)' \
+		| xargs -rt -0 sed -Ei 's/^(bind-address|log|user\s)/#&/'; \
+# don't reverse lookup hostnames, they are usually another container
+	echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+
+# retrieve mariadb entrypoint
+RUN curl -o /usr/local/bin/mariadb-entrypoint.sh https://raw.githubusercontent.com/MariaDB/mariadb-docker/master/docker-entrypoint.sh && \
+    chmod +x /usr/local/bin/mariadb-entrypoint.sh && \
+    ln -sf $(which setuser) /usr/local/bin/gosu
+
+ADD database/kopano-user.sql /docker-entrypoint-initdb.d/
 
 # copy original config files to a backup location
 # so they are still available when /etc/kopano/ gets mounted from the host
