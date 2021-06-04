@@ -4,8 +4,7 @@ set -euo pipefail
 source ../kopano-helper.sh
 
 ensure_config kidmd.cfg
-ensure_dir /etc/kopano/kidm/ldif
-
+ensure_dir /etc/kopano/kidm/ldif/main.d/
 
 # read settings from kustomerd.cfg into env (emulates systemds EnvironmentFile)
 sed s/\ *=\ */=/g "/etc/kopano/kustomerd.cfg" > /tmp/kustomer-env
