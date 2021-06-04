@@ -3,8 +3,15 @@ copyright: © 2021 Kopano b.v.
 site_author: Kopano Maintainers
 nav:
     - Home: index.md
+    - Configuration: configuration.md
+    - Examples:
+      - Docker-compose: docker-compose/index.md
 
 # Project source specific:
 repo_name: 'GitHub'
 repo_url: 'https://github.com/kopano-dev/kopano-one-container'
 edit_uri: 'edit/main/docs/'
+
+markdown_extensions:
+    - toc:
+        separator: "_"

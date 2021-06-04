@@ -1,0 +1,1 @@
+Store license file retrieved from https://kopano.com/downloads-demo/ here

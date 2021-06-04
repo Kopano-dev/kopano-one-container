@@ -1,3 +1,3 @@
 # Documentation
 
-Place to store documentation on how to run this setup in different environments.
+You can view the compiled documentation at http://kopano-dev.github.io/kopano-one-container

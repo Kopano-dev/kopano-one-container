@@ -27,8 +27,7 @@ RUN apt-get update && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION && \
-    # TODO add kopano-smtpstd kopano-kidmd once available
+    apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION kopano-smtpstd kopano-kidmd && \
     rm -rf /var/cache/apt /var/lib/apt/lists/* && \
 # purge and re-create /var/lib/mysql with appropriate ownership
 	rm -rf /var/lib/mysql; \
@@ -46,7 +45,7 @@ RUN curl -o /usr/local/bin/mariadb-entrypoint.sh https://raw.githubusercontent.c
     chmod +x /usr/local/bin/mariadb-entrypoint.sh && \
     ln -sf $(which setuser) /usr/local/bin/gosu
 
-ADD database/kopano-user.sql /docker-entrypoint-initdb.d/
+ADD configuration/kopano-user.sql /docker-entrypoint-initdb.d/
 
 # copy original config files to a backup location
 # so they are still available when /etc/kopano/ gets mounted from the host

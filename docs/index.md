@@ -1,17 +1,3 @@
-# Welcome to MkDocs
+# Running Kopano One in a container
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+This project provides a container image that can be used to run [Kopano One](https://kopano.com/products/groupware/one/) on various container runtimes. The image contains all components for a Kopano One deployment including database, mail transport and user management.
