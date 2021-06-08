@@ -15,3 +15,12 @@ edit_uri: 'edit/main/docs/'
 markdown_extensions:
     - toc:
         separator: "_"
+        permalink: true
+
+# pip3 install mkdocs-material
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
