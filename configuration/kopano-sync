@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# sync kopano user list
+/usr/sbin/kopano-admin --sync
