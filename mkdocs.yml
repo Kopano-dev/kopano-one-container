@@ -1,6 +1,7 @@
 site_name: Kopano One Container
 copyright: © 2021 Kopano b.v.
 site_author: Kopano Maintainers
+site_url: null
 nav:
     - Home: index.md
     - Configuration: configuration.md
@@ -24,3 +25,5 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
+  logo: assets/Kopano_icon_square.png
+  favicon: assets/Kopano_icon_square.png
