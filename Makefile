@@ -9,7 +9,7 @@ MAKEFLAGS += --no-builtin-rules
 DOCKER_REPO := kopano
 
 VCS_REF := $(shell git rev-parse --short HEAD)
-DATE := $(shell date '+%Y%m%d%H%M%S')
+TAG := $(shell date '+%Y%m%d%H%M%S')
 
 KOPANO_ONE_REPOSITORY_URL=https://repo.kopano.com/kopano/one
 ONE_VERSION=20.09
@@ -36,8 +36,8 @@ test-enter:
 
 .PHONY: tag
 tag: build
-	docker tag $(DOCKER_REPO)/kopano-one $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(DATE)
+	docker tag $(DOCKER_REPO)/kopano-one $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(TAG)
 
 .PHONY: publish
 publish: tag
-	docker push $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(DATE)
+	docker push $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(TAG)

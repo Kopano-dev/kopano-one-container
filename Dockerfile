@@ -31,15 +31,15 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION kopano-smtpstd kopano-kidmd && \
     rm -rf /var/cache/apt /var/lib/apt/lists/* && \
 # purge and re-create /var/lib/mysql with appropriate ownership
-	rm -rf /var/lib/mysql&& \
-	mkdir -p /var/lib/mysql&& \
-	chown -R mysql:mysql /var/lib/mysql&& \
+    rm -rf /var/lib/mysql && \
+    mkdir -p /var/lib/mysql && \
+    chown -R mysql:mysql /var/lib/mysql && \
 # comment out a few problematic configuration values
-	find /etc/mysql/ -name '*.cnf' -print0 \
-		| xargs -0 grep -lZE '^(bind-address|log|user\s)' \
-		| xargs -rt -0 sed -Ei 's/^(bind-address|log|user\s)/#&/'&& \
+    find /etc/mysql/ -name '*.cnf' -print0 \
+        | xargs -0 grep -lZE '^(bind-address|log|user\s)' \
+        | xargs -rt -0 sed -Ei 's/^(bind-address|log|user\s)/#&/' && \
 # don't reverse lookup hostnames, they are usually another container
-	echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+    echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
 
 # retrieve mariadb entrypoint
 RUN curl -o /usr/local/bin/mariadb-entrypoint.sh https://raw.githubusercontent.com/MariaDB/mariadb-docker/76ead913384ec7dbb66518999bdf522942f15582/docker-entrypoint.sh && \
