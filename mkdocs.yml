@@ -9,7 +9,7 @@ nav:
       - Docker-compose: docker-compose/index.md
 
 # Project source specific:
-repo_name: 'GitHub'
+repo_name: 'Kopano-dev/kopano-one-container'
 repo_url: 'https://github.com/kopano-dev/kopano-one-container'
 edit_uri: 'edit/main/docs/'
 
