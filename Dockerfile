@@ -42,7 +42,7 @@ RUN apt-get update && \
 	echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
 
 # retrieve mariadb entrypoint
-RUN curl -o /usr/local/bin/mariadb-entrypoint.sh https://raw.githubusercontent.com/MariaDB/mariadb-docker/master/docker-entrypoint.sh && \
+RUN curl -o /usr/local/bin/mariadb-entrypoint.sh https://raw.githubusercontent.com/MariaDB/mariadb-docker/76ead913384ec7dbb66518999bdf522942f15582/docker-entrypoint.sh && \
     chmod +x /usr/local/bin/mariadb-entrypoint.sh && \
     ln -sf $(which setuser) /usr/local/bin/gosu
 
