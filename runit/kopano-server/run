@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config server.cfg
+ensure_config ldap.cfg
+
+exec 2>&1
+exec /usr/sbin/kopano-server -F

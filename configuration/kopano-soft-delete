@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# remove itms older than 30 days from softdelete
+/usr/sbin/kopano-admin --purge-softdelete 30

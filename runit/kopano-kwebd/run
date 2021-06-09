@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config kwebd.cfg
+ensure_dir /etc/kopano/kweb/extra.d
+
+# read settings from kwebd.cfg into env (emulates systemds EnvironmentFile)
+sed s/\ *=\ */=/g "/etc/kopano/kwebd.cfg" > /tmp/kweb-env
+# shellcheck disable=SC2046
+export $(grep -v '^#' /tmp/kweb-env | xargs -d '\n')
+
+/usr/sbin/kopano-kwebd setup
+
+exec /sbin/setuser www-data /usr/sbin/kopano-kwebd serve

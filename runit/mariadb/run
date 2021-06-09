@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mkdir -p /var/run/mysqld/
+chown mysql:mysql /var/run/mysqld/
+
+export MARIADB_RANDOM_ROOT_PASSWORD=true
+
+exec /usr/local/bin/mariadb-entrypoint.sh mysqld

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config kustomerd.cfg
+ensure_dir /etc/kopano/licenses
+ensure_dir /run/kopano-kustomerd
+chown nobody /run/kopano-kustomerd
+
+# read settings from kustomerd.cfg into env (emulates systemds EnvironmentFile)
+sed s/\ *=\ */=/g "/etc/kopano/kustomerd.cfg" > /tmp/kustomer-env
+# shellcheck disable=SC2046
+export $(grep -v '^#' /tmp/kustomer-env | xargs -d '\n')
+
+exec /sbin/setuser nobody /usr/sbin/kopano-kustomerd serve

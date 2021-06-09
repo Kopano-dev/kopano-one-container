@@ -1,0 +1,29 @@
+site_name: Kopano One Container
+copyright: © 2021 Kopano b.v.
+site_author: Kopano Maintainers
+site_url: null
+nav:
+    - Home: index.md
+    - Configuration: configuration.md
+    - Examples:
+      - Docker-compose: docker-compose/index.md
+
+# Project source specific:
+repo_name: 'GitHub'
+repo_url: 'https://github.com/kopano-dev/kopano-one-container'
+edit_uri: 'edit/main/docs/'
+
+markdown_extensions:
+    - toc:
+        separator: "_"
+        permalink: true
+
+# pip3 install mkdocs-material
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+  logo: assets/Kopano_icon_square.png
+  favicon: assets/Kopano_icon_square.png

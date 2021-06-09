@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+source ../kopano-helper.sh
+
+ensure_config smtpstd.cfg
+ensure_dir /var/lib/kopano-smtpstd
+chown nobody /var/lib/kopano-smtpstd
+
+# read settings from smtpstd.cfg into env (emulates systemds EnvironmentFile)
+sed s/\ *=\ */=/g "/etc/kopano/smtpstd.cfg" > /tmp/smtpstd-env
+# shellcheck disable=SC2046
+export $(grep -v '^#' /tmp/smtpstd-env | xargs -d '\n')
+
+exec /sbin/setuser nobody /usr/sbin/kopano-smtpstd serve

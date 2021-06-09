@@ -6,10 +6,10 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-docker_repo := kopano
+DOCKER_REPO := kopano
 
-vcs_ref := $(shell git rev-parse --short HEAD)
-date := $(shell date '+%Y%m%d%H%M%S')
+VCS_REF := $(shell git rev-parse --short HEAD)
+TAG := $(shell date '+%Y%m%d%H%M%S')
 
 KOPANO_ONE_REPOSITORY_URL=https://repo.kopano.com/kopano/one
 ONE_VERSION=20.09
@@ -17,16 +17,27 @@ ONE_VERSION=20.09
 .PHONY: build
 build:
 	docker buildx build --platform linux/amd64 --rm \
-		--build-arg VCS_REF=$(vcs_ref) \
+		--build-arg VCS_REF=$(VCS_REF) \
 		--build-arg KOPANO_ONE_REPOSITORY_URL=$(KOPANO_ONE_REPOSITORY_URL) \
 		--build-arg ONE_VERSION=$(ONE_VERSION) \
-		--cache-from $(docker_repo)/kopano-one:latest \
-		-t $(docker_repo)/kopano-one .
+		-t $(DOCKER_REPO)/kopano-one .
+
+.PHONY: test
+test:
+	docker-compose -f docs/docker-compose/docker-compose.yml up
+
+.PHONY: test-clean
+test-clean:
+	docker-compose -f docs/docker-compose/docker-compose.yml down -v
+
+.PHONY: test-enter
+test-enter:
+	docker-compose -f docs/docker-compose/docker-compose.yml exec kopano-one bash
 
 .PHONY: tag
 tag: build
-	docker tag $(docker_repo)/kopano-one $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
+	docker tag $(DOCKER_REPO)/kopano-one $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(TAG)
 
 .PHONY: publish
 publish: tag
-	docker push $(docker_repo)/kopano-one:$(ONE_VERSION)-$(date)
+	docker push $(DOCKER_REPO)/kopano-one:$(ONE_VERSION)-$(TAG)
