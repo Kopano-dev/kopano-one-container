@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+set -x
+
+if ! kopano-smtpstd status; then
+  echo "smptst has not yet started"
+  exit 1
+fi
+
+/usr/sbin/postfix check
+
+# configure postfix automatically based on smtpstd configuration
+postconf -e virtual_mailbox_domains="$(kopano-smtpstd status --json |jq -r '.domains | join(" ")')"
+postconf -e relayhost=[127.0.0.1]:10025
+postconf -e default_transport=smtp
+postconf -e relay_transport=smtp
+
+#exec /usr/lib/postfix/sbin/master -d
+exec /usr/sbin/postfix -c /etc/postfix start-fg
