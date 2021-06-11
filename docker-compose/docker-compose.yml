@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  kopano-one:
+    image: ${docker_repo:-kopano}/kopano-one:${ONE_VERSION:-latest}
+    #read_only: true
+    ports:
+      - "9080:9080"
+      - "9443:9443"
+    restart: unless-stopped
+    volumes:
+      - ./config:/etc/kopano/
+      - /etc/machine-id:/etc/machine-id
+      - /etc/machine-id:/var/lib/dbus/machine-id
+      - kopanosocket:/run/kopano
+    tmpfs:
+      - /run
+      - /tmp
+    networks:
+      kopano:
+        aliases:
+          - kopano.demo
+
+volumes:
+  kopanodata:
+  kopanosocket:
+
+networks:
+  kopano:

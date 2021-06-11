@@ -1,0 +1,6 @@
+dn: cn=readonly,{{.BaseDN}}
+cn: readonly
+description: LDAP read only service user
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: readonly
