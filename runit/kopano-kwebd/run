@@ -5,6 +5,8 @@ source ../kopano-helper.sh
 
 ensure_config kwebd.cfg
 ensure_dir /etc/kopano/kweb/extra.d
+ensure_dir /etc/kopano/webapp
+cfgdir=/etc/kopano/webapp tpldir=/etc/kopano.in/webapp ensure_config config.php
 
 # read settings from kwebd.cfg into env (emulates systemds EnvironmentFile)
 sed s/\ *=\ */=/g "/etc/kopano/kwebd.cfg" > /tmp/kweb-env
