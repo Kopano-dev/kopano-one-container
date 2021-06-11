@@ -33,6 +33,7 @@ RUN curl -sfL https://github.com/powerman/dockerize/releases/download/"$DOCKERIZ
     dockerize --version
 
 RUN apt-get update && \
+# required smtpstd 0.3.3
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION kopano-smtpstd kopano-kidmd && \
     rm -rf /var/cache/apt /var/lib/apt/lists/* && \
 # purge and re-create /var/lib/mysql with appropriate ownership
