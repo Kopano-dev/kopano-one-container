@@ -21,13 +21,19 @@ VOLUME ["/etc/kopano/", "/var/lib/mysql/", "/var/lib/kopano/"]
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y curl gnupg2 pwgen software-properties-common && \
+    apt-get install --no-install-recommends -y curl gnupg2 jq pwgen software-properties-common && \
     curl -fsSL $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION/gpg | apt-key add - && \
     add-apt-repository "deb $KOPANO_ONE_REPOSITORY_URL/$ONE_VERSION $(lsb_release -cs) supported" && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
+ENV DOCKERIZE_VERSION v0.14.0
+RUN curl -sfL https://github.com/powerman/dockerize/releases/download/"$DOCKERIZE_VERSION"/dockerize-"$(uname -s)"-"$(uname -m)" \
+    | install /dev/stdin /usr/local/bin/dockerize && \
+    dockerize --version
+
 RUN apt-get update && \
+# required smtpstd 0.3.3
     apt-get install --no-install-recommends -y kopano-one-$ONE_VERSION kopano-smtpstd kopano-kidmd && \
     rm -rf /var/cache/apt /var/lib/apt/lists/* && \
 # purge and re-create /var/lib/mysql with appropriate ownership
